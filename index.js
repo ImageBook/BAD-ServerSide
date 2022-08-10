@@ -60,6 +60,28 @@ async function run() {
             res.send(result);
         })
 
+        // delete blog
+        app.delete('/blogs/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) };
+            const result = await blogCollection.deleteOne(query);
+            res.send(result);
+        })
+
+        // update blog
+        app.patch('/blogs/:id', async (req, res) => {
+            const id = req.params.id;
+            const blogInfo = req.body;
+            const filter = { _id: ObjectId(id) };
+            const updateDoc = {
+                $set: blogInfo
+            };
+            console.log('update doc', updateDoc);
+            const result = await blogCollection.updateOne(filter, updateDoc);
+            console.log(result);
+            res.send(result);
+        })
+
         console.log('everything working by now...');
     }
     finally {
