@@ -76,9 +76,9 @@ async function run() {
             const updateDoc = {
                 $set: blogInfo
             };
-            console.log('update doc', updateDoc);
+            // console.log('update doc', updateDoc);
             const result = await blogCollection.updateOne(filter, updateDoc);
-            console.log(result);
+            // console.log(result);
             res.send(result);
         })
 
